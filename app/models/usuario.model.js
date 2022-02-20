@@ -17,11 +17,10 @@ module.exports = (sequelize, Sequelize) => {
         passwordResetExpires: {
             type: Sequelize.DATE
         },
-        email: {
+        login: {
             type: Sequelize.STRING,
             allowNull: false,
             unique: true,
-            isEmail: true,
         },
         senha: {
             type: Sequelize.VIRTUAL,
@@ -33,7 +32,7 @@ module.exports = (sequelize, Sequelize) => {
             validate: {
                 isIn: {
                     args: [['gerente', 'admin']],
-                    msg: 'O usuário deve ser um gestor'
+                    msg: 'O usuário deve ser um gerente'
                 }
             }
         },

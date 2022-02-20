@@ -27,16 +27,18 @@ exports.create = async (req, res) => {
 
   const gerente = {
     nome: req.body.nome,
-    matricula: req.body.matricula,
-    contato: req.body.contato,
-    area: req.body.area,
+    email: req.body.email,
+    cpf: req.body.cpf,
+    telefone: req.body.telefone,
+    data_nasc: req.body.data_nasc,
+    nome_mae: req.body.nome_mae,
     status: req.body.status ? req.body.status : true,
   };
 
   // Create a Usuario
   const usuario = {
     gerente_id: req.body.gerente_id,
-    email: req.body.email,
+    login: req.body.login,
     senha: req.body.senha,
     funcao: req.body.funcao ? req.body.funcao : "gerente",
     status: req.body.status ? req.body.status : true,
@@ -44,21 +46,21 @@ exports.create = async (req, res) => {
 
   var gerenteFind = await Gerente.findOne({
     where: {
-      matricula: gerente.matricula
+      cpf: gerente.cpf
     }
   })
-  var emailFind = await Usuario.findOne({
+  var emailFind = await Gerente.findOne({
     where: {
-      email: usuario.email
+      email: gerente.email
     }
   })
 
   if (gerenteFind != null) {
-    if (gerenteFind.dataValues.matricula == gerente.matricula)
+    if (gerenteFind.dataValues.cpf == gerente.cpf)
       return res.status(400).send({ error: 'Matricula ja existe' })
   }
   if (emailFind != null) {
-    if (emailFind.dataValues.email == usuario.email)
+    if (emailFind.dataValues.email == gerente.email)
       return res.status(400).send({ error: 'Email ja existe' })
   }
 
@@ -67,7 +69,7 @@ exports.create = async (req, res) => {
       usuario.gerente_id = data.id
       Usuario.create(usuario)
         .then(data => {
-          res.send({ nome: gerente.nome, matricula: gerente.matricula, area:gerente.area, contato: gerente.contato, email: data.email, função: data.funcao, status: data.status, token: generateToken({ id: data.id }) });
+          res.send({ nome: gerente.nome, cpf: gerente.cpf, login: data.login, data_nasc: gerente.data_nasc, nome_mae: gerente.nome_mae, telefone: gerente.telefone, email: gerente.email, função: data.funcao, status: data.status, token: generateToken({ id: data.id }) });
         })
     })
     .catch(error => {
@@ -123,10 +125,10 @@ exports.update = async (req, res) => {
   })
   var gerenteFind = await Gerente.findOne({
     where: {
-      matricula: req.body.matricula
+      cpf: req.body.cpf
     }
   })
-  var emailFind = await Usuario.findOne({
+  var emailFind = await Gerente.findOne({
     where: {
       email: req.body.email
     }

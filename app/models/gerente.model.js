@@ -4,16 +4,24 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false
       },
-      matricula: {
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+        isEmail: true
+      },
+      cpf: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
       },
-      area: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      data_nasc: {
+        type: Sequelize.DATEONLY
       },
-      contato: {
+      nome_mae: {
+        type: Sequelize.STRING
+      },
+      telefone: {
         type: Sequelize.STRING
       },
       status: {
