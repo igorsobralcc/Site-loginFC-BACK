@@ -58,6 +58,7 @@ module.exports = (sequelize, Sequelize) => {
             as: 'gerente'
         })
     }
+    
 
     return Usuario;
 };

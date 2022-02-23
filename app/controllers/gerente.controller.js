@@ -223,11 +223,6 @@ exports.delete = async (req, res) => {
         });
       }
     })
-    .catch(err => {
-      res.status(500).send({
-        message: "Nao pode deletar gerente com id=" + id
-      });
-    });
 };
 
 // Delete all Gerentes from the database.
