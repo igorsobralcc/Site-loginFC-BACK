@@ -7,7 +7,7 @@
 - Rode o comando `npm install -g yarn`
 - Navegue até o projeto
 - Rode `yarn install`
-- Rode`yarn serve` para iniciar o servidor no localhost
+- Rode`yarn run dev` para iniciar o servidor no localhost
 
 Você também pode usar funções adiocionais como
 - `npm run build` para buildar o app para produção
